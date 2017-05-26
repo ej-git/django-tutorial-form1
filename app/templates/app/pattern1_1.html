@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+      <form action="{% url 'app:pattern1_2' %}" method="POST">
+      {{ form.as_p }}
+      {% csrf_token %}
+      <button type="submit">送信</button>
+      </form>
+  </body>
+</html>
