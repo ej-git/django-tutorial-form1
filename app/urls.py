@@ -21,4 +21,6 @@ app_name = 'app'
 urlpatterns = [
     url(r'^$', views.Pattern1_1.as_view(), name='pattern1_1'),
     url(r'^pattern1_2/$', views.Pattern1_2.as_view(), name='pattern1_2'),
+    url(r'^pattern1_3/$', views.Pattern1_3.as_view(), name='pattern1_3'),
+    url(r'^pattern2/$', views.Pattern2.as_view(), name='pattern2'),
 ]

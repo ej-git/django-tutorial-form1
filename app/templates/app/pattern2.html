@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+      <h1>jsを使い1ページ内で完結させる例</h1>
+      <form action="{% url 'app:pattern1_2' %}" method="POST">
+      {{ form.as_p }}
+      {% csrf_token %}
+      <button type="submit">送信</button>
+      </form>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+      <script>
+          var city_choice1_w = "{% for choice in CITY_CHOICES1_w %}<option value='{{ choice.0 }}'>{{ choice.1 }}</option>{% endfor %}"
+          var city_choice1_e = "{% for choice in CITY_CHOICES1_e %}<option value='{{ choice.0 }}'>{{ choice.1 }}</option>{% endfor %}"
+              
+          var city_choice2_w = "{% for choice in CITY_CHOICES2_w %}<option value='{{ choice.0 }}'>{{ choice.1 }}</option>{% endfor %}"
+          var city_choice2_e = "{% for choice in CITY_CHOICES2_e %}<option value='{{ choice.0 }}'>{{ choice.1 }}</option>{% endfor %}"
+
+          var city_choice3_w = "{% for choice in CITY_CHOICES3_w %}<option value='{{ choice.0 }}'>{{ choice.1 }}</option>{% endfor %}"
+          var city_choice3_e = "{% for choice in CITY_CHOICES3_e %}<option value='{{ choice.0 }}'>{{ choice.1 }}</option>{% endfor %}"
+          
+        $('#id_country').on('change',function(e){
+            e.preventDefault();
+            set_select()
+        });
+        $('#id_area').on('change',function(e){
+            e.preventDefault();
+            set_select()
+        });
+        function set_select(){
+            var country = $("#id_country").val();
+            var area = $("#id_area").val();
+            var choice = null;
+            if(country == "1"){
+                if(area == "1"){
+                    choice = city_choice1_w
+                }else{
+                    choice = city_choice1_e
+                }
+            }else if(country == "2"){
+                if(area == "1"){
+                    choice = city_choice2_w
+                }else{
+                    choice = city_choice2_e
+                }                
+            }else{
+                if(area == "1"){
+                    choice = city_choice3_w
+                }else{
+                    choice = city_choice3_e
+                }                
+            }
+            $("#id_city").html(choice);
+        }
+      </script>
+  </body>
+</html>
