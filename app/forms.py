@@ -62,12 +62,27 @@ class Form2(forms.Form):
     country = forms.ChoiceField(
         label='国',
         choices=COUNTRY_CHOICES,
+        widget=forms.RadioSelect(
+            attrs={ 
+                "class": "form-control", 
+            }
+        )
     )
     area = forms.ChoiceField(
         label='エリア',
         choices=AREA_CHOICES,
+        widget=forms.RadioSelect(
+            attrs={ 
+                "class": "form-control", 
+            }
+        )
     )
     city = forms.MultipleChoiceField(
         label='市',
         choices=CITY_CHOICES1_w,
+        widget=forms.CheckboxSelectMultiple(
+            attrs={ 
+                "class": "form-control", 
+            }
+        )
     )

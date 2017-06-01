@@ -13,26 +13,32 @@
 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
       <script>
-          var city_choice1_w = "{% for choice in CITY_CHOICES1_w %}<option value='{{ choice.0 }}'>{{ choice.1 }}</option>{% endfor %}"
-          var city_choice1_e = "{% for choice in CITY_CHOICES1_e %}<option value='{{ choice.0 }}'>{{ choice.1 }}</option>{% endfor %}"
+          var city_choice1_w = "{% for choice in CITY_CHOICES1_w %}<li><label for='city_choice_{{ forloop.counter0 }}'><input class='form-control' id='city_choice__{{ forloop.counter0 }}' name='city' value='{{ choice.0 }}' type='checkbox'>{{ choice.1 }}</label></li>{% endfor %}"
+          var city_choice1_e = "{% for choice in CITY_CHOICES1_e %}<li><label for='city_choice_{{ forloop.counter0 }}'><input class='form-control' id='city_choice__{{ forloop.counter0 }}' name='city' value='{{ choice.0 }}' type='checkbox'>{{ choice.1 }}</label></li>{% endfor %}"
               
-          var city_choice2_w = "{% for choice in CITY_CHOICES2_w %}<option value='{{ choice.0 }}'>{{ choice.1 }}</option>{% endfor %}"
-          var city_choice2_e = "{% for choice in CITY_CHOICES2_e %}<option value='{{ choice.0 }}'>{{ choice.1 }}</option>{% endfor %}"
+          var city_choice2_w = "{% for choice in CITY_CHOICES2_w %}<li><label for='city_choice_{{ forloop.counter0 }}'><input class='form-control' id='city_choice__{{ forloop.counter0 }}' name='city' value='{{ choice.0 }}' type='checkbox'>{{ choice.1 }}</label></li>{% endfor %}"
+          var city_choice2_e = "{% for choice in CITY_CHOICES2_e %}<li><label for='city_choice_{{ forloop.counter0 }}'><input class='form-control' id='city_choice__{{ forloop.counter0 }}' name='city' value='{{ choice.0 }}' type='checkbox'>{{ choice.1 }}</label></li>{% endfor %}"
 
-          var city_choice3_w = "{% for choice in CITY_CHOICES3_w %}<option value='{{ choice.0 }}'>{{ choice.1 }}</option>{% endfor %}"
-          var city_choice3_e = "{% for choice in CITY_CHOICES3_e %}<option value='{{ choice.0 }}'>{{ choice.1 }}</option>{% endfor %}"
+          var city_choice3_w = "{% for choice in CITY_CHOICES3_w %}<li><label for='city_choice_{{ forloop.counter0 }}'><input class='form-control' id='city_choice__{{ forloop.counter0 }}' name='city' value='{{ choice.0 }}' type='checkbox'>{{ choice.1 }}</label></li>{% endfor %}"
+          var city_choice3_e = "{% for choice in CITY_CHOICES3_e %}<li><label for='city_choice_{{ forloop.counter0 }}'><input class='form-control' id='city_choice__{{ forloop.counter0 }}' name='city' value='{{ choice.0 }}' type='checkbox'>{{ choice.1 }}</label></li>{% endfor %}"
           
         $('#id_country').on('change',function(e){
             e.preventDefault();
             set_select()
+            is_checked()
         });
         $('#id_area').on('change',function(e){
             e.preventDefault();
             set_select()
         });
+        $('label').click(function(){
+            is_checked()
+        });
         function set_select(){
-            var country = $("#id_country").val();
-            var area = $("#id_area").val();
+            // var country = $("#id_country").val();
+            // var area = $("#id_area").val();
+            var country = $("#id_country input[type=radio][name=country]:checked").val();
+            var area = $("#id_area input[type=radio][name=area]:checked").val();
             var choice = null;
             if(country == "1"){
                 if(area == "1"){
@@ -54,6 +60,11 @@
                 }                
             }
             $("#id_city").html(choice);
+        }
+
+        function is_checked(){
+            $("label:has(input:checked)").addClass("is_checked");
+            $("label:not(:has(input:checked))").removeClass("is_checked");
         }
       </script>
   </body>
